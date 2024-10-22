@@ -1,7 +1,10 @@
 <script lang='ts'>
+  import { enhance } from '$app/forms';
   import { afterUpdate } from "svelte";
-  import type { PageData, ActionData } from './$types';
+  import type { PageData, ActionData, SubmitFunction } from './$types';
   import { Button } from "$lib/components/ui/button/index.js";
+
+  let isLoading = false;
   
   export let data: PageData;
   
@@ -28,7 +31,19 @@
     }
   });
 
+  const handleSubmit: SubmitFunction = () => {   
+    isLoading = true; // Show the load spinner
+    // ... (your existing form submission logic)
+    return async ({update, result}) => {
+      await update()
+      isLoading = false;
+    }
+    // Hide the load spinner
+  };
+
 </script>
+
+
 
 <div class="w-100 h-[40vh] bg-gradient-to-r from-emerald-500 to-emerald-900">
   <h1  class=" relative text-[4.5rem] text-white font-bold text-center top-[3.2rem]">HotStuff</h1>
@@ -39,7 +54,7 @@
 
 
   <div class="flex flex-col gap-4">
-    <form action="?/tell_story" method="POST">
+    <form use:enhance={handleSubmit} action="?/tell_story" method="POST">
       <label for="story-prompt" class="block text-gray-700 font-bold mb-2">Enter your story prompt:</label>
       <textarea
         bind:value={prompt}
@@ -62,7 +77,12 @@
     </div>
   </div>
 </div>
-
+<div class="flex items-center justify-center">
+  {#if isLoading}
+    <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 border-blue-500 rounded-full opacity-75 mr-2">🌀</div>
+    <h2 class="font-bold">Your Story is Loading</h2>
+  {/if}
+</div>
 {#if showAlert}
   <div class="fixed inset-0 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg p-4">
