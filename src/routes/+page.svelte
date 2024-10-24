@@ -3,9 +3,6 @@
   import { afterUpdate } from "svelte";
   import type { PageData, ActionData, SubmitFunction } from './$types';
   import { Button } from "$lib/components/ui/button/index.js";
-  
-
-
 
 
   let isLoading = false;
@@ -45,6 +42,7 @@
     // Hide the load spinner
   };
 
+  // Dropdown menu
 </script>
 
 <!-- nav bar -->
@@ -53,6 +51,8 @@
     <a href="/" class="text-white text-2xl font-bold">HotStuff</a>
     <ul class="flex space-x-6">
       <li><a href="/" class="text-gray-300 hover:text-white">Home</a></li>
+      <li><a href="/" class="text-gray-300 hover:text-white">Latest</a></li>
+
       <li><a href="/about" class="text-gray-300 hover:text-white">About</a></li>
       <li><a href="/contact" class="text-gray-300 hover:text-white">Contact</a></li>
     </ul>
@@ -61,9 +61,10 @@
 <!-- end of nav bar -->
 
 <!-- Banner Screen -->
-<div class="w-100 h-[40vh] bg-gradient-to-r from-emerald-500 to-emerald-900">
+<div class="w-100 h-[80vh] bg-gradient-to-r from-emerald-500 to-emerald-900">
   <h1  class=" relative text-[4.5rem] text-white font-bold text-center top-[3.2rem]">HotStuff</h1>
   <h1 class="text-[3rem] text-white font-bold text-center mt-7 ">Story Maker</h1>
+  <img class="mx-auto w-[50rem] relative bottom-[3rem] " src="src/lib/storytelling-4203628_1920-removebg-preview.png" alt="Description of the image">
 </div>
 
 <!-- end of banner screen -->
@@ -114,6 +115,21 @@
     </div>
   </div>
 {/if}
+
+<footer class="bg-gradient-to-r from-emerald-500 to-emerald-900 text-white py-4 mt-16">
+  <div class="container mx-auto flex flex-col items-center justify-between md:flex-row">
+    <div class="mb-4 md:mb-0">
+      <a href="/" class="text-xl font-bold">HotStuff</a>
+      <p class="text-sm mt-2">Your go-to source for creative stories.</p>
+    </div>
+    <div class="flex space-x-4">
+      <a href="/" class="hover:text-gray-300">Home</a>
+      <a href="/about" class="hover:text-gray-300">About</a>
+      <a href="/contact" class="hover:text-gray-300">Contact</a>
+    </div>
+  </div>
+</footer>
+
 
 <!-- <Typewriter>
   <div class="flex text-center font-bold flex-col justify-center">
